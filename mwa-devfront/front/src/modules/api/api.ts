@@ -1,5 +1,5 @@
 import { apifetch } from "./axios";
-import { IReqUser } from "../../interfaces";
+import { IReqUser}from "../../interfaces";
 
 type CreateUserResponse = {
   access_token: string;
@@ -21,4 +21,16 @@ export const api = {
 
     return data;
   },
+  getAllUsers: async (value:IReqUser) => {
+    const user = {username: value.username};
+    const resp = await apifetch.get<CreateUserResponse>(`/api/v1/users`);
+    const data = {
+      userId: resp.id,
+      username: resp.username,
+      password: resp.password,
+      events: resp.events
+    }
+    return data;
+  }
+  
 };
