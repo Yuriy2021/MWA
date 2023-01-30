@@ -31,9 +31,16 @@ export const api = {
       console.error(error)
     };
   
+  },
+
+  createUser: async (value:IReqUser) => {
+    const data = {
+      username: value.username,
+      password: value.password,
+    };
+    const resp = await apifetch.post<CreateUserResponse>(`/api/v1/users`, {...data,});
   }
-    // const user = {username: value.username};
-    // const resp = await apifetch.get<GetUsersReponse>(`/api/v1/users`);
+    
 
   
     
