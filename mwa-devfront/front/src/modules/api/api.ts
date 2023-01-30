@@ -4,6 +4,9 @@ import { IReqUser}from "../../interfaces";
 type CreateUserResponse = {
   access_token: string;
 };
+type GetUsersReponse = {
+  users_list:[];
+}
 
 export const api = {
   loginAccount: async (value: IReqUser) => {
@@ -22,15 +25,18 @@ export const api = {
     return data;
   },
   getAllUsers: async (value:IReqUser) => {
-    const user = {username: value.username};
-    const resp = await apifetch.get<CreateUserResponse>(`/api/v1/users`);
-    const data = {
-      userId: resp.id,
-      username: resp.username,
-      password: resp.password,
-      events: resp.events
-    }
-    return data;
+    try {
+      const resp = await apifetch.get<GetUsersReponse>(`/api/v1/users`)
+    }catch (error) {
+      console.error(error)
+    };
+  
   }
+    // const user = {username: value.username};
+    // const resp = await apifetch.get<GetUsersReponse>(`/api/v1/users`);
+
+  
+    
+  
   
 };
