@@ -78,6 +78,13 @@ type GetUsersRequests = {
     };
     const resp = await apifetch.post<CreateUserResponse>(`/api/v1/register`, {...data,});
   },
-      
+  getUserProfile: async (value:any) => {
+    try {
+      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/auth/profile`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+   
 
 };
