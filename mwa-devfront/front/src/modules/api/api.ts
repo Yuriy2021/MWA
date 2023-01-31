@@ -63,11 +63,21 @@ type GetUsersRequests = {
       console.error(error)
     };
   },
-  
-    
+  deleteUser: async (value:IUserID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.delete<GetUsersResponse>(`/api/v1/users/${id}`)
+    } catch (error) {
+      console.error(error)
+    };
+  },
+  registerUser: async (value:IReqUser) => {
+    const data = {
+      username: value.username,
+      password: value.password,
+    };
+    const resp = await apifetch.post<CreateUserResponse>(`/api/v1/register`, {...data,});
+  },
+      
 
-  
-    
-  
-  
 };
