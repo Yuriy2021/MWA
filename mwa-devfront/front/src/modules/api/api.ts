@@ -1,14 +1,20 @@
 import { apifetch } from "./axios";
-import { IReqUser}from "../../interfaces";
+import { IReqUser} from "../../interfaces";
 
 type CreateUserResponse = {
   access_token: string;
 };
-type GetUsersReponse = {
+type GetUsersResponse = {
   users_list:[];
-}
+};
+interface IUserID{
+  id:string;
+};
+type GetUsersRequests = {
+  data: {}
+};
 
-export const api = {
+  export const api = {
   loginAccount: async (value: IReqUser) => {
     const user = { username: value.username, password: value.password };
     const resp = await apifetch.post<CreateUserResponse>(`/api/v1/auth/login`, {
@@ -26,7 +32,7 @@ export const api = {
   },
   getAllUsers: async (value:IReqUser) => {
     try {
-      const resp = await apifetch.get<GetUsersReponse>(`/api/v1/users`)
+      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/users`)
     }catch (error) {
       console.error(error)
     };
@@ -39,7 +45,25 @@ export const api = {
       password: value.password,
     };
     const resp = await apifetch.post<CreateUserResponse>(`/api/v1/users`, {...data,});
-  }
+  },
+
+  getUserbyId: async (value:IUserID) => {
+    try {
+      const id = value.id
+      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/users/${id}`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  updateUser: async (value:IUserID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.patch<GetUsersRequests>(`/api/v1/users/${id}`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  
     
 
   
