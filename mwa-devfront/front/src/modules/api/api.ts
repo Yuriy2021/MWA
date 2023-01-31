@@ -10,6 +10,12 @@ type GetUsersResponse = {
 interface IUserID{
   id:string;
 };
+interface IData{
+  data:{
+    title: string,
+    description: string,
+  }
+};
 type GetUsersRequests = {
   data: {}
 };
@@ -85,6 +91,19 @@ type GetUsersRequests = {
       console.error(error)
     };
   },
+  createEvent: async (value:IData) => {
+    try {
+      const data = {
+        title: value.data.title,
+        description: value.data.description,}
+
+        const resp = await apifetch.post<CreateUserResponse>(`/api/v1/event`,{...data,});
+      }catch(error){
+        console.error(error)
+      };
+  },
+  
+  
    
 
 };
