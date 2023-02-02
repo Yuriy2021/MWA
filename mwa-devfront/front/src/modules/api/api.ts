@@ -10,10 +10,19 @@ type GetUsersResponse = {
 interface IUserID{
   id:string;
 };
+interface IEventID{
+  id: string;
+}
+interface IGiftData {
+  title: string,
+  link: string,
+  description: string,
+}
 interface IData{
   data:{
     title: string,
     description: string,
+    isActive:boolean,
   }
 };
 type GetUsersRequests = {
@@ -102,8 +111,91 @@ type GetUsersRequests = {
         console.error(error)
       };
   },
-  
-  
-   
+  getAllEvents: async (value:any) => {
+    try {
+      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/event`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  getEventbyId: async (value:IEventID) => {
+    try {
+      const id = value.id
+      const resp = await apifetch.get<GetUsersRequests>(`/api/v1/event/${id}`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  updateEvent: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.patch<GetUsersRequests>(`/api/v1/event/${id}`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  deleteEvent: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.delete<GetUsersResponse>(`/api/v1/event/${id}`)
+    } catch (error) {
+      console.error(error)
+    };
+  },
+  createGift: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.post<GetUsersRequests>(`/api/v1/gift/${id}`)
+    } catch (error) {
+      console.error(error)
+    };
+  },
+  getAllGifts: async (value:any) => {
+    try {
+      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/gift`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  getGiftbyId: async (value:IEventID) => {
+    try {
+      const id = value.id
+      const resp = await apifetch.get<GetUsersRequests>(`/api/v1/gift/${id}`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  updateGift: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.patch<GetUsersRequests>(`/api/v1/gift/${id}`)
+    }catch (error) {
+      console.error(error)
+    };
+  },
+  deleteGift: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.delete<GetUsersResponse>(`/api/v1/event/${id}`)
+    } catch (error) {
+      console.error(error)
+    };
+  },
+  bookGift: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.post<GetUsersRequests>(`/api/v1/gift/book/${id}`)
+    } catch (error) {
+      console.error(error)
+    };
+  },
+  unbookGift: async (value:IEventID) => {
+    try {
+      const id = value.id;
+      const resp = await apifetch.delete<GetUsersRequests>(`/api/v1/gift/book/${id}`)
+    } catch (error) {
+      console.error(error)
+    };
+  },
 
 };
